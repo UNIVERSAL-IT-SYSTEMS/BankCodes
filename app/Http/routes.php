@@ -12,9 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
+Route::get('countries{filter?}','CountryController@index');
+Route::get('countries/{id}', 'CountryController@show');
+
+Route::get('countries/{id}/banks', ['as' => 'listBanks' , 'uses' => 'BankController@index']);
+Route::get('countries/{alpha2}/banks/{id}', ['as' => 'getBanks', 'uses' => 'BankController@show']);
+
+Route::get('search', 'SearchController@search');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
